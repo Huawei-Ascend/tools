@@ -22,13 +22,13 @@ EN|[CH](README.md)
 
 2. Download the SD card making script and ubuntu18.04-arm.iso。  
 	Run the following command in the $HOME directory of a common user (for example, the ascend user) in the local environment to download code from the tools repository:  
-	**git clone https://gitee.com/ascend/tools.git**  
+	**git clone https://github.com/Huawei-Ascend/tools.git**  
 	(If Git is not installed, run the sudo apt-get install git command to install it.)  
 
 	Go to the C73 card making directory:  
 	**cd $HOME/tools/makesd/for_1.7x.0.0/**  
 	```powershell  
-	ascend@ubuntu:~$ git clone https://gitee.com/ascend/tools.git
+	ascend@ubuntu:~$ git clone https://github.com/Huawei-Ascend/tools.git
 	Cloning into 'tools'...
 	remote: Enumerating objects: 273, done.
 	remote: Counting objects: 100% (273/273), done.

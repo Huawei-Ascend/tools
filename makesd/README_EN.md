@@ -8,10 +8,10 @@ Select the software packages for SD card making based on the version used, or cl
 
 #### explain
 
-1. [for_1.7x.0.0](https://gitee.com/ascend/tools/tree/master/makesd/for_1.7x.0.0)
+1. [for_1.7x.0.0](https://github.com/Huawei-Ascend/tools/tree/master/makesd/for_1.7x.0.0)
 
    **1.7x.0.0**: software packages required for card making.
 
-2. [for_1.3x.0.0](https://gitee.com/ascend/tools/tree/master/makesd/for_1.3x.0.0)
+2. [for_1.3x.0.0](https://github.com/Huawei-Ascend/tools/tree/master/makesd/for_1.3x.0.0)
 
    **1.3x.0.0**: software packages required for card making.

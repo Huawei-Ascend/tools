@@ -14,7 +14,7 @@ img2bin能够生成模型推理所需的输入数据，以.bin格式保存。当
 
 1. 下载压缩包方式获取。
 
-   将 https://gitee.com/ascend/tools 仓中的脚本下载至服务器的任意目录。
+   将 https://github.com/Huawei-Ascend/tools 仓中的脚本下载至服务器的任意目录。
 
    例如存放路径为：$HOME/AscendProjects/tools。
 
@@ -22,7 +22,7 @@ img2bin能够生成模型推理所需的输入数据，以.bin格式保存。当
 
    在命令行中：$HOME/AscendProjects目录下执行以下命令下载代码。
 
-   **git clone  https://gitee.com/ascend/tools.git**
+   **git clone  https://github.com/Huawei-Ascend/tools.git**
 
 ## 使用方法
 进入脚本所在目录。

@@ -9,21 +9,21 @@ Ascend tools
 
 #### explain
 
-1.  [amexec](https://gitee.com/ascend/tools/tree/master/amexec)
+1.  [amexec](https://github.com/Huawei-Ascend/tools/tree/master/amexec)
 
     **Model reasoning tool**:Input. Om model and model required input bin file, output model output data file.
 
-2.  [img2bin](https://gitee.com/ascend/tools/tree/master/img2bin)
+2.  [img2bin](https://github.com/Huawei-Ascend/tools/tree/master/img2bin)
 
     **Bin file generation tool** : Generates input data required for model reasoning, saved in.bin format.
 
-3.  [makesd](https://gitee.com/ascend/tools/tree/master/makesd)
+3.  [makesd](https://github.com/Huawei-Ascend/tools/tree/master/makesd)
     
     **makesd tool**：makesd tools package，Provide card making function under ubuntu.  
 
-4.  [faster_install](https://gitee.com/ascend/tools/tree/master/faster_install)
+4.  [faster_install](https://github.com/Huawei-Ascend/tools/tree/master/faster_install)
     
     **faster_install**：environment fast install script.  
 
-5.  [configure_usb_ethernet](https://gitee.com/ascend/tools/tree/master/configure_usb_ethernet)  
+5.  [configure_usb_ethernet](https://github.com/Huawei-Ascend/tools/tree/master/configure_usb_ethernet)  
      **configure_usb_ethernet**：configuring the IP address of the USB NIC 。

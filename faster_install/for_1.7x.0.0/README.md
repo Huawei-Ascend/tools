@@ -30,7 +30,7 @@
 
 命令行中使用以下命令下载faster-install脚本。
 
-**git clone https://gitee.com/ascend/tools.git** 
+**git clone https://github.com/Huawei-Ascend/tools.git** 
 
 将faster-install目录下的faster_install.sh脚本拷贝到$HOME目录下。
 

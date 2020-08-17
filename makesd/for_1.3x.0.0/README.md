@@ -22,13 +22,13 @@
 
 2. 下载制卡脚本和ubuntu16.04.3-arm.iso。  
 	在本地环境普通用户（以ascend用户为例）的$HOME目录下执行以下命令，下载tools仓代码。  
-	**git clone https://gitee.com/ascend/tools.git**  
+	**git clone https://github.com/Huawei-Ascend/tools.git**  
 	（注：如果没有安装git，执行sudo apt-get install git 安装git）  
 
 	执行以下命令，进入C32制卡目录。  
 	**cd $HOME/tools/makesd/for_1.3x.0.0/**  
 	```powershell  
-	ascend@ubuntu:~$ git clone https://gitee.com/ascend/tools.git
+	ascend@ubuntu:~$ git clone https://github.com/Huawei-Ascend/tools.git
 	Cloning into 'tools'...
 	remote: Enumerating objects: 273, done.
 	remote: Counting objects: 100% (273/273), done.
