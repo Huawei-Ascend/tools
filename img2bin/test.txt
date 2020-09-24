@@ -1,3 +1,0 @@
-[baseconf]
-input_node=[1200,1150,416,416]
-shape=[1,4]

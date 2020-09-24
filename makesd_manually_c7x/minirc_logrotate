@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Clean non existent log file entries from status file
+# 从状态文件中清除不存在的日志文件项
+cd /var/lib/logrotate
+# 判断status文件是否存在
+test -e status || touch status
+
+head -1 status > status.clean
+sed 's/"//g' status | while read logfile date
+do
+    [ -e "${logfile}" ] && echo "\"${logfile}\" ${date}"
+done >> status.clean
+
+test -x /usr/sbin/logrotate || exit 0
+/usr/sbin/logrotate /etc/crob.minirc/minirc_logrotate.conf
