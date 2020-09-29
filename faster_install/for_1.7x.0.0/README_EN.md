@@ -1,12 +1,13 @@
 EN|[中文](README.md)
 
-# fast-install for the Ubuntu 18.04 Development Environment
+# Ascend Development Environment, for Atlas 200 DK, Atlas 300
+# version: 20.0.0.RC (1.73)
 
 #### Introduction
 
-This script is applicable to the Ubuntu 18.04 OS and can be used to quickly install the C7x development environment, including the Python environment and MindStudio.
+This script is applicable to the Ubuntu 18.04 OS and can be used to quickly install development environment, including the Python environment and MindStudio.
 #### Preparations
-1. Install Ubuntu 18.04 in a virtual machine (VM).
+1. Ubuntu 18.04 (x86).
 
 2. Download the Toolkit packages (**Ascend-Toolkit-[version]-x86_64-linux_gcc7.3.0.run** and **Ascend-Toolkit-[version]-arm-linux_gcc7.3.0.run**) from https://www.huaweicloud.com/ascend/resource/Software for MindStudio installation. Save the downloaded packages to the **$HOME** directory.
 
