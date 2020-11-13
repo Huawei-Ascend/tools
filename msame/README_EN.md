@@ -6,11 +6,12 @@ EN|[中文](README.md)
 
 The msame tool takes the offline model (.om) and the .bin file required by the model as the inputs, and outputs the model output data. Inferring on the same input data for multiple times is supported.
 
-The model must be an offline model converted with the C7x version of ATC. The input .bin file must meet the input requirements of the model (multiple inputs are supported).
+The model must be an offline model converted with  ATC. The input .bin file must meet the input requirements of the model (multiple inputs are supported).
 
 ### Environment
 
-Install the C7x environments by referring to *Driver and Development Environment Setup Guide*.
+The development and running environment has been installed on ascend AI reasoning equipment.  
+Installation reference documents: https://support.huaweicloud.com/instg-cli-cann/atlascli_03_0001.html
 
 ### Acquisition
 
@@ -30,22 +31,22 @@ Install the C7x environments by referring to *Driver and Development Environment
 
 #### a. Run the built tool.
 
-**Environment requirements: The architecture is Arm and the C7x operating environment has been installed. If the preceding requirements are not meet, use method b to build the source code.**
+**Environment requirements:**  
+The development and running environment has been installed on shengteng AI reasoning equipment.  
+Installation reference documents：https://support.huaweicloud.com/instg-cli-cann/atlascli_03_0001.html
 
 Go to the **msame** directory.
 ```
 cd $HOME/AscendProjects/tools/msame/
 ```
 
-Go to the **out** directory.
+The msame tool is in the **out** directory. Go to the **out** directory.
 ```
 cd out
 ```
 
-The msame tool is in the **out** directory.
 
-
-Run the tool in the command line.
+Run the tool in the command line like this
 ```
 ./msame --model /home/HwHiAiUser/ljj/colorization.om --input /home/HwHiAiUser/ljj/colorization_input.bin --output /home/HwHiAiUser/ljj/MSAME/out/output1 --outfmt TXT --loop 2
 ```
@@ -55,8 +56,15 @@ For details about other parameters, run the **--help** command.
 
 #### b. Build and run the source code.
 
-**Environment requirements: The C7x operating development has been installed (both co-deployment and separate deployment are available).**   
-Source code build is supported. If you need to modify the code, the code needs to be rebuilt. Run the following command to go to the **msame** directory:
+**Environment requirements: The  operating development has been installed (both co-deployment and separate deployment are available).**   
+Source code build is supported. If you need to modify the code, the code needs to be rebuilt.   
+
+Set environment variables  
+(The following example shows how to set environment variables. Replace /home/HwHiAiUser/Ascend/ascend-toolkit/latest/xxx-linux_gccx.x.x with the actual installation path of the ACLlib installation package in /home/HwHiAiUser/Ascend/ascend-toolkit/latest/xxx-linux_gccx.x.x form.)  
+**export DDK_PATH=/home/HwHiAiUser/Ascend/ascend-toolkit/latest**  
+**export NPU_HOST_LIB=/home/HwHiAiUser/Ascend/ascend-toolkit/latest/acllib/lib64/stub** 
+
+Run the following command to go to the **msame** directory:
 ```
 cd $HOME/AscendProjects/tools/msame/
 ```
