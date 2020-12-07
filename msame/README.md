@@ -5,11 +5,10 @@
 ### 功能
 输入.om模型和模型所需要的输入bin文件，输出模型的输出数据文件，支持多次推理（指对同一输入数据进行推理）。
 
-模型必须是通过atc工具转换的om模型，输入bin文件需要符合模型的输入要求（支持模型多输入）。
+模型必须是通过c7x版本的atc工具转换的om模型，输入bin文件需要符合模型的输入要求（支持模型多输入）。
 
 ### 使用环境
-已在昇腾AI推理设备上安装开发与运行环境。  
-安装参考文档：https://support.huaweicloud.com/instg-cli-cann/atlascli_03_0001.html
+按照《驱动和开发环境安装指南》装好C7x环境。
 
 ### 获取
 1. 下载压缩包方式获取。
@@ -28,38 +27,45 @@
 ### 使用方法
 #### a. 使用已编译好的工具直接运行。   
 
- **环境要求：架构为arm、已安装运行环境。如环境不符，请使用方法b，进行源码编译。**  
-
+ **环境要求：架构为arm、已安装c7x的运行环境。如环境不符，请使用方法b，进行源码编译。** 
+  
 进入msame目录
 ```
 cd $HOME/AscendProjects/tools/msame/
 ```
-工具在out目录下,进入out目录
+进入out目录
 ```
 cd out
 ```
+工具就在out目录下
 
-运行方式例如
+
+工具为命令行的运行方式，例如推理单个bin文件：
 ```
 ./msame --model /home/HwHiAiUser/ljj/colorization.om --input /home/HwHiAiUser/ljj/colorization_input.bin --output /home/HwHiAiUser/ljj/AMEXEC/out/output1 --outfmt TXT --loop 2
 ```
-如果有多个输入，需要用**英文逗号**隔开，注意逗号两边不能有空格。  
+推理文件夹下所有bin文件：
+```
+./msame --model /home/HwHiAiUser/ljj/colorization.om --input /home/HwHiAiUser/ljj/ --output /home/HwHiAiUser/ljj/AMEXEC/out/output1
+```
+如果有多个输入，需要用**英文逗号**隔开，注意逗号两边不能有空格；多输入为目录时，需要保持多个目录下文件名相同。\
+例如：./msame --model /home/HwHiAiUser/ljj/colorization.om --input dir1/,dir2/,dir3/ --output \
+bin文件在三个目录dir1、dir2、dir3下命名相同
+  
 其他参数详情可使用--help查询。
 
 
 #### b. 源码编译运行。
- **环境要求：已安装开发运行环境，分设合设都可以。**   
-工具也支持源码编译，或者使用者需要添加或者修改代码，使用者重新编译  
-
-设置环境变量  
-(如下为设置环境变量的示例，请将/home/HwHiAiUser/Ascend/ascend-toolkit/latest替换为Ascend 的ACLlib安装包的实际安装路径。) 
- 
-**export DDK_PATH=/home/HwHiAiUser/Ascend/ascend-toolkit/latest**  
-**export NPU_HOST_LIB=/home/HwHiAiUser/Ascend/ascend-toolkit/latest/acllib/lib64/stub**
-
+ **环境要求：已安装c7x的开发运行环境，分设合设都可以。**   
+工具也支持源码编译，或者使用者需要添加或者修改代码，使用者重新编译
 进入msame目录
 ```
 cd $HOME/AscendProjects/tools/msame/
+```
+设置环境变量DDK_PATH、NPU_HOST_LIB
+```
+export DDK_PATH=/home/HwHiAiUser/Ascend/ascend-toolkit/20.10.0.B023
+export NPU_HOST_LIB=/home/HwHiAiUser/Ascend/ascend-toolkit/20.10.0.B023/acllib/lib64/stub
 ```
 运行编译脚本
 ```
@@ -77,7 +83,7 @@ dump、动态多batch功能暂不支持。
 | 参数名   | 说明                            |
 | -------- | ------------------------------- |
 | --model  | 需要进行推理的om模型            |
-| --input  | 模型需要的输入，若不填，会自动生成都为0的数据                  |
+| --input  | 模型需要的输入，若不填，会自动生成都为0的数据; 支持输入路径，多输入时，需要保证多目录下文件名相同                  |
 | --output | 推理数据输出路径                |
 | --outfmt | 输出数据的格式，TXT或者BIN      |
 | --loop   | 推理次数 [1,100]，可选参数，默认1，profiler为true时，推荐为1 |

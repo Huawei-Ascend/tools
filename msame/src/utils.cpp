@@ -1,19 +1,15 @@
-/**
-* Copyright 2020 Huawei Technologies Co., Ltd
+/*
+* @file utils.cpp
 *
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-
-* http://www.apache.org/licenses/LICENSE-2.0
-
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
+* Copyright (C) Huawei Technologies Co., Ltd. 2020-2020. All rights reserved.
+* Description: model_process
+* Author: fuyangchenghu
+* Create: 2020/6/22
+* Notes:
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
-
 #include "utils.h"
 #include "acl/acl.h"
 #include <sys/time.h>
@@ -276,4 +272,25 @@ void Utils::DumpJson(bool isdump, map<char, string>& params)
             mkdir(temp_s1, 0775);
         }
     }
+}
+
+int Utils::ScanFiles(std::vector<std::string> &fileList, std::string inputDirectory)
+{
+    const char* str= inputDirectory.c_str();
+    DIR* dir= opendir(str);
+    struct dirent* p= NULL;
+    while((p= readdir(dir)) != NULL )
+    {
+        if (p->d_name[0] != '.')
+        {
+            string name = string(p->d_name);
+            fileList.push_back(name);
+        }
+    }
+    closedir(dir);
+    if (fileList.size() ==0)
+    {
+        printf("[ERROR] No file in the directory[%s]",str);
+    }
+    return fileList.size();
 }
