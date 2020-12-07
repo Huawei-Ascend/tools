@@ -40,18 +40,11 @@ cd out
 工具就在out目录下
 
 
-工具为命令行的运行方式，例如推理单个bin文件：
+工具为命令行的运行方式，例如
 ```
 ./msame --model /home/HwHiAiUser/ljj/colorization.om --input /home/HwHiAiUser/ljj/colorization_input.bin --output /home/HwHiAiUser/ljj/AMEXEC/out/output1 --outfmt TXT --loop 2
 ```
-推理文件夹下所有bin文件：
-```
-./msame --model /home/HwHiAiUser/ljj/colorization.om --input /home/HwHiAiUser/ljj/ --output /home/HwHiAiUser/ljj/AMEXEC/out/output1
-```
-如果有多个输入，需要用**英文逗号**隔开，注意逗号两边不能有空格；多输入为目录时，需要保持多个目录下文件名相同。\
-例如：./msame --model /home/HwHiAiUser/ljj/colorization.om --input dir1/,dir2/,dir3/ --output \
-bin文件在三个目录dir1、dir2、dir3下命名相同
-  
+如果有多个输入，需要用**英文逗号**隔开，注意逗号两边不能有空格。  
 其他参数详情可使用--help查询。
 
 
@@ -61,11 +54,6 @@ bin文件在三个目录dir1、dir2、dir3下命名相同
 进入msame目录
 ```
 cd $HOME/AscendProjects/tools/msame/
-```
-设置环境变量DDK_PATH、NPU_HOST_LIB
-```
-export DDK_PATH=/home/HwHiAiUser/Ascend/ascend-toolkit/20.10.0.B023
-export NPU_HOST_LIB=/home/HwHiAiUser/Ascend/ascend-toolkit/20.10.0.B023/acllib/lib64/stub
 ```
 运行编译脚本
 ```
@@ -83,7 +71,7 @@ dump、动态多batch功能暂不支持。
 | 参数名   | 说明                            |
 | -------- | ------------------------------- |
 | --model  | 需要进行推理的om模型            |
-| --input  | 模型需要的输入，若不填，会自动生成都为0的数据; 支持输入路径，多输入时，需要保证多目录下文件名相同                  |
+| --input  | 模型需要的输入，若不填，会自动生成都为0的数据                  |
 | --output | 推理数据输出路径                |
 | --outfmt | 输出数据的格式，TXT或者BIN      |
 | --loop   | 推理次数 [1,100]，可选参数，默认1，profiler为true时，推荐为1 |

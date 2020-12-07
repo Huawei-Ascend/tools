@@ -1,15 +1,19 @@
-/*
-* @file model_process.cpp
+/**
+* Copyright 2020 Huawei Technologies Co., Ltd
 *
-* Copyright (C) Huawei Technologies Co., Ltd. 2020-2020. All rights reserved.
-* Description: model_process
-* Author: fuyangchenghu
-* Create: 2020/6/22
-* Notes:
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+
+* http://www.apache.org/licenses/LICENSE-2.0
+
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
 */
+
 #include "model_process.h"
 #include "utils.h"
 #include <cstddef>
@@ -332,14 +336,18 @@ Result ModelProcess::CreateOutput()
 
 void ModelProcess::OutputModelResult(std::string& s, std::string& modelName, size_t index)
 {
-    //Don't need sub folders
-    DIR *dirp;
-    string times = s; // + "/" + T + "_" + to_string(index);
+    const char* temp_s = s.c_str();
+    if (NULL == opendir(temp_s)) {
+        mkdir(temp_s, 0775);
+    }
+    std::string T = Utils::TimeLine();
+    string times = s + "/" + T + "_" + to_string(index);
     const char* time = times.c_str();
     cout << time << endl;
-    dirp = opendir(time);
-    if (NULL == dirp) {
-        mkdir(time, 0775);
+    mkdir(time, 0775);
+    if (NULL == opendir(time)) {
+        ERROR_LOG("current user does not have permission");
+        exit(0);
     }
 
     for (size_t i = 0; i < aclmdlGetDatasetNumBuffers(output_); ++i) {
@@ -585,7 +593,7 @@ void ModelProcess::OutputModelResult(std::string& s, std::string& modelName, siz
             }
         }
     }
-    closedir(dirp);
+
     INFO_LOG("output data success");
     return;
 }

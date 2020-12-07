@@ -56,6 +56,10 @@ fi
 ISO_FILE_DIR=$2
 ISO_FILE=$3
 
+DRIVER_PACKAGE=$(ls Ascend310-driver-*.tar.gz)
+AICPU_KERNELS_PACKAGE=$(ls Ascend310-aicpu_kernels-*.tar.gz)
+ACLLIB_PACKAGE=$(ls Ascend-acllib-*.run)
+
 NETWORK_CARD_DEFAULT_IP=$4
 USB_CARD_DEFAULT_IP=$5
 
@@ -110,11 +114,6 @@ function filesClean()
     fi
     rm -rf ${TMPDIR_SD3_MOUNT}
     rm -rf ${LogPath}driver
-
-    if [ -n "$CANN_PACKAGE" ]; then
-        rm -rf Ascend310-aicpu_kernels-*-minirc.tar.gz
-        rm -rf Ascend-acllib-*-ubuntu18.04.aarch64-minirc.run
-    fi
 }
 #end
 # ************************check ip****************************************
@@ -139,52 +138,6 @@ function checkIpAddr()
    done
    return 0
 }
-
-# ************************check Ascend CANN****************************************
-# Description:  check Ascend CANN valid or not
-# $1: ip
-# ******************************************************************************
-function checkAscendCannPackage()
-{
-    ACLLIB_PACKAGE=$(ls Ascend-acllib-*-ubuntu18.04.aarch64-minirc.run)
-    AICPU_KERNELS_PACKAGE=$(ls Ascend310-aicpu_kernels-*-minirc.tar.gz)
-    if [[ ! -n "$ACLLIB_PACKAGE" ]] || [[ ! -n "$AICPU_KERNELS_PACKAGE" ]]; then
-        DRIVER_PACKAGE=$(ls A200dk-npu-driver-*-ubuntu18.04-aarch64-minirc.tar.gz)
-        if [ ! -n "$DRIVER_PACKAGE" ]; then
-            echo "find A200dk-npu-driver-*-ubuntu18.04-aarch64-minirc.tar.gz failed. please put this package in this folder."
-            return 1
-        fi
-        
-        CANN_PACKAGE=$(ls Ascend-cann-minirc_*_ubuntu18.04-aarch64.zip)
-        if [ ! -n "$CANN_PACKAGE" ]; then
-            echo "find Ascend-cann-minirc_*_ubuntu18.04-aarch64.zip failed. please put this package in this folder."
-            return 1
-        fi
-
-        unzip ${CANN_PACKAGE} Ascend310-aicpu_kernels-*-minirc.tar.gz
-        if [ $? -ne 0 ]; then
-            echo "unzip Ascend310-aicpu_kernels-*-minirc.tar.gz failed. please check ${CANN_PACKAGE}."
-            return 1
-        fi
-        AICPU_KERNELS_PACKAGE=$(ls Ascend310-aicpu_kernels-*-minirc.tar.gz)
-
-        unzip ${CANN_PACKAGE} Ascend-acllib-*-ubuntu18.04.aarch64-minirc.run
-        if [ $? -ne 0 ]; then
-            echo "unzip Ascend-acllib-*-ubuntu18.04.aarch64-minirc.run failed. please check ${CANN_PACKAGE}."
-            return 1
-        fi
-        ACLLIB_PACKAGE=$(ls Ascend-acllib-*-ubuntu18.04.aarch64-minirc.run)
-
-        return 0
-    else
-        DRIVER_PACKAGE=$(ls Ascend310-driver-*.tar.gz)
-        if [ ! -n "$DRIVER_PACKAGE" ]; then
-            echo "find Ascend310-driver-*.tar.gz failed. please put this package in this folder."
-            return 1
-        fi
-    fi
-}
-
 
 # **************check network card and usb card ip******************************
 # Description:  check network card and usb card ip
@@ -633,10 +586,6 @@ function installAclLib()
     echo "start install acl lib"
 	
     cp -f ${ISO_FILE_DIR}/$ACLLIB_PACKAGE ${LogPath}squashfs-root/home/HwHiAiUser/
-    if [[ $? -ne 0 ]];then
-        echo "Failed: Copy ${ISO_FILE_DIR}/$ACLLIB_PACKAGE to filesystem failed!"
-        return 1
-    fi
     chmod 750 ${LogPath}squashfs-root/home/HwHiAiUser/$ACLLIB_PACKAGE
 	
 	generateAclLibInstallShell
@@ -665,10 +614,6 @@ exit 0
 function installAicpuKernels()
 {
     tar zxf ${ISO_FILE_DIR}/${AICPU_KERNELS_PACKAGE} -C ${LogPath}squashfs-root/home/HwHiAiUser/
-    if [[ $? -ne 0 ]];then
-        echo "Failed: tar zxf ${ISO_FILE_DIR}/${AICPU_KERNELS_PACKAGE} to filesystem failed!"
-        return 1
-    fi
     genAicpuKernInstShell
 }
 
@@ -703,7 +648,7 @@ function preInstallMinircPackage()
 	    echo "Pre install acllib package failed"
         return 1
     fi
-    echo "pre install acl lib end"
+ echo "pre install acl lib end"
 	
 	installAicpuKernels
 	if [ $? -ne 0 ];then
@@ -711,7 +656,7 @@ function preInstallMinircPackage()
         return 1
     fi
 
-    echo "pre install aicpu end"
+echo "pre install aicpu  end"
 	
 	rm -rf ${LogPath}mini_pkg_install/opt
     cp -rf ${LogPath}mini_pkg_install/* ${LogPath}squashfs-root/
@@ -769,12 +714,6 @@ function main()
 
     # ***************check network and usb card ip**********************************
     checkIps
-    if [ $? -ne 0 ];then
-        return 1
-    fi
-
-    # ***************check ascend cann package **********************************
-    checkAscendCannPackage
     if [ $? -ne 0 ];then
         return 1
     fi
@@ -886,4 +825,3 @@ fi
 echo "Success" > ${LogPath}/make_ubuntu_sd.result
 exit 0
 # end
-
