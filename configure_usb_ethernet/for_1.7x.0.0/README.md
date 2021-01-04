@@ -9,7 +9,7 @@
 	**cd $HOME/tools/configure_usb_ethernet/for_1.7x.0.0/**  
 	
 2. 切换root用户。    
-    **su root**
+    **su - root**
  
 3. 执行如下命令进行USB网卡IP地址的配置。  
     **bash configure_usb_ethernet.sh -s ip_address**      
